@@ -1,0 +1,270 @@
+/* ============================= */
+/* 🌐 ESTILO GENERAL            */
+/* ============================= */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer {
+    background-color: #1e1e1e;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: #f0f0f0;
+    margin-bottom: 20px;
+}
+
+
+/* ============================= */
+/* 🛒 VISTA DE PRODUCTOS        */
+/* ============================= */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
+
+.product-card {
+    background-color: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: scale(1.02);
+}
+
+.product-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.product-card h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.product-card p {
+    margin: 5px 0;
+}
+
+.product-card .price {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ============================= */
+/* 💻 BOTÓN DE AGREGAR AL CARRITO */
+/* ============================= */
+form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+
+/* ============================= */
+/* 👕 DETALLE DE PRODUCTO       */
+
+
+/* === Product Detail === */
+.product-detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    gap: 40px;
+}
+
+.product-detail-img {
+    flex: 1;
+}
+
+.product-image-large {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.product-info {
+    flex: 2;
+    color: white;
+}
+
+/* === Carrito === */
+.cart-container {
+    padding: 30px;
+}
+
+.cart-product-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-product-item {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.cart-product-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* === Checkout === */
+.checkout-form-container {
+    padding: 40px;
+    max-width: 500px;
+    margin: auto;
+    background-color: #222;
+    color: white;
+    border-radius: 10px;
+}
+
+.checkout-form label {
+    display: block;
+    margin-top: 15px;
+}
+
+.checkout-form input, .checkout-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.primary-btn, .secondary-btn {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    margin-top: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.secondary-btn {
+    background-color: #6c757d;
+}
+
+.primary-btn:hover, .secondary-btn:hover {
+    background-color: #218838;
+}
+
+.info-msg {
+    color: lightgreen;
+    margin-top: 20px;
+}
+
+.empty-cart-msg {
+    color: white;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+/* ============================= */
+.product-detail {
+    padding: 40px;
+    max-width: 900px;
+    margin: 40px auto;
+    background: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    color: #f0f0f0;
+}
+
+.product-detail-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.product-image {
+    width: 250px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-info {
+    flex: 1;
+    text-align: left;
+}
+
+.product-info p {
+    margin: 8px 0;
+    font-size: 1rem;
+}
+
+.disponible {
+    color: #00cc66;
+    font-weight: bold;
+}
+
+.no-disponible {
+    color: #ff3333;
+    font-weight: bold;
+}
+
+.volver {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.volver:hover {
+    text-decoration: underline;
+}
+

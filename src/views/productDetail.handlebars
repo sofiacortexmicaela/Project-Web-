@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{product.title}}</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>{{product.title}}</h1>
+    </header>
+
+    <main class="product-detail-container">
+        <div class="product-card">
+            {{#if product.thumbnails.[0]}}
+                <img src="{{product.thumbnails.[0]}}" alt="{{product.title}}" class="product-image">
+            {{else}}
+                <img src="/img/default.jpg" alt="Imagen no disponible" class="product-image">
+            {{/if}}
+
+            <div class="product-info">
+                <p><strong>Descripción:</strong> {{product.description}}</p>
+                <p><strong>Precio:</strong> ${{product.price}}</p>
+                <p><strong>Categoría:</strong> {{product.category}}</p>
+                <p><strong>Stock:</strong> {{product.stock}}</p>
+                <p><strong>Disponibilidad:</strong> 
+                    {{#if product.available}}
+                        <span class="disponible">Disponible</span>
+                    {{else}}
+                        <span class="no-disponible">No disponible</span>
+                    {{/if}}
+                </p>
+                <a href="/products" class="volver">← Volver a productos</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

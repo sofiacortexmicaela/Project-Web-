@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <!-- Vincula tu archivo CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1 class="page-title">{{title}}</h1>
+    </header>
+    <main>
+        <div class="product-list">
+            {{#each products}}
+            <div class="product-card-wrapper">
+                <a href="/products/{{this._id}}" class="product-card-link">
+                    <div class="product-card">
+                        <img src="{{this.thumbnails.[0]}}" alt="{{this.title}}" class="product-img">
+                        <h2>{{this.title}}</h2>
+                        <p>Descripción: {{this.description}}</p>
+                        <p class="price">Precio: ${{this.price}}</p>
+                        <p>Categoría: {{this.category}}</p>
+                    </div>
+                </a>
+
+                <!-- Formulario para que el cliente pueda crear su carrito unico desde la web -->
+                <form action="/add-to-cart/{{this._id}}" method="POST">
+                     <input type="hidden" name="cartId" value="{{../cartId}}">
+                    <button type="submit">Agregar al carrito</button>
+                </form>
+            </div>
+            {{/each}}
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Mi Tienda - Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>
+

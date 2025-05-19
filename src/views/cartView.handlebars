@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1 class="page-title">{{title}}</h1>
+    </header>
+
+    <main class="cart-container">
+        {{#if cart.products.length}}
+            <ul class="cart-product-list">
+                {{#each cart.products}}
+                    <li class="cart-product-item">
+                        <img src="{{product.thumbnails.[0]}}" alt="{{product.title}}" class="product-image">
+                        <div>
+                            <strong>{{this.product.title}}</strong><br>
+                            Cantidad: {{this.quantity}}<br>
+                            Precio: ${{this.product.price}}<br>
+                            <small>{{this.product.description}}</small>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+
+            <div class="cart-actions">
+                <a href="/products"><button class="primary-btn">Agregar más productos</button></a>
+                <form action="/datosDeCompra" method="GET">
+                    <button type="submit" class="primary-btn">Iniciar compra</button>
+                </form>
+            </div>
+        {{else}}
+            <p class="empty-cart-msg">Tu carrito está vacío.</p>
+            <a href="/products"><button class="primary-btn">Ir a productos</button></a>
+        {{/if}}
+    </main>
+</body>
+</html>
+
