@@ -12,27 +12,44 @@
 
     <main class="product-detail-container">
         <div class="product-card">
-            {{#if product.thumbnails.[0]}}
-                <img src="{{product.thumbnails.[0]}}" alt="{{product.title}}" class="product-image">
-            {{else}}
-                <img src="/img/default.jpg" alt="Imagen no disponible" class="product-image">
-            {{/if}}
+            <div class="carousel-container">
+    <img id="mainImage" src="{{#if product.thumbnails.[0]}}{{product.thumbnails.[0]}}{{else}}/img/default.jpg{{/if}}" alt="{{product.title}}" class="product-image">
+
+    <div class="thumbnail-carousel">
+        {{#each product.thumbnails}}
+            <img src="{{this}}" alt="Vista adicional" class="thumbnail" onclick="changeImage('{{this}}')">
+        {{/each}}
+    </div>
+</div>
+
 
             <div class="product-info">
                 <p><strong>Descripción:</strong> {{product.description}}</p>
                 <p><strong>Precio:</strong> ${{product.price}}</p>
                 <p><strong>Categoría:</strong> {{product.category}}</p>
-                <p><strong>Stock:</strong> {{product.stock}}</p>
                 <p><strong>Disponibilidad:</strong> 
                     {{#if product.available}}
                         <span class="disponible">Disponible</span>
                     {{else}}
                         <span class="no-disponible">No disponible</span>
                     {{/if}}
+
+                <form action="/add-to-cart/{{product._id}}" method="POST">
+                     <input type="hidden" name="cartId" value="{{cartId}}">
+                     <button type="submit" class="add-btn">Agregar al carrito</button>
+                </form>
                 </p>
                 <a href="/products" class="volver">← Volver a productos</a>
             </div>
         </div>
     </main>
+
+
+    <script>
+    function changeImage(src) {
+        const mainImg = document.getElementById('mainImage');
+        mainImg.src = src;
+    }
+    </script>
 </body>
 </html>

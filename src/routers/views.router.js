@@ -18,7 +18,7 @@ router.get('/products', async (req, res) => {
 
         res.render('products', {
             products,
-            title: ' Gym Growl ',
+            title: ' Sofit | Tienda deportiva ',
             cartId
         });
     } catch (error) {
@@ -37,9 +37,12 @@ router.get('/products/:id', async (req, res) => {
         }
 
         res.render('productDetail', {
-            title: `Detalle de ${product.title}`,
-            product
-        });
+        title: `Detalle de ${product.title}`,
+        product,
+        helpers: {
+         json: (context) => JSON.stringify(context)
+        }
+    });
     } catch (error) {
         console.error('Error al obtener producto:', error);
         res.status(500).render('error', { message: 'Error del servidor' });

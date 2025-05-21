@@ -1,7 +1,5 @@
-Entrega Final Curso Desarrollo Backend Avanzado
 
-   (
-    /Entrega Final Backend ------> Estructura del proyecto
+    /Web ------> Estructura del proyecto
         /src
             /controllers
                 carts.controller              
@@ -30,7 +28,7 @@ Entrega Final Curso Desarrollo Backend Avanzado
                 productDetail.handlebars      # pagina de detalles de los productos
                 products.handlebars           # pagina principal
                 cartView.handlebars           # pagina de carrito
-                checkout.handlebars           # pagina para que el cliente compre y se guarde en la bd
+                checkout.handlebars           # para que el cliente compre y se guarde en la bd
                 realtimeProducts.handlebars   # productos en tiempo real 
                 /layouts
                     main.handlebars           # estructura HTML base
@@ -40,13 +38,12 @@ Entrega Final Curso Desarrollo Backend Avanzado
     .gitignore                                # Para ignorar node_modules y .env
     package.json 
     package-lock.json                         # Archivos de dependencias  
-   )
 
 -------------------------------------------------------------------------------------------------
 
          Web principal --------> http://localhost:8080/products
 
-    Aplicación e-commerce para poder vender productos,  En la pagina por ahora se pueden ver los productos, si el cliente toca un producto lo redirige a otra pagina que te muestra los detalles del producto, si el cliente toca el boton de agregar al carrito, se le crea un carrito unico en la base de datos , y lo redirige a la pagina donde se muestra su carrito,
+    Aplicación e-commerce para poder vender ropa deportiva , En la pagina por ahora se pueden ver los productos, si el cliente toca un producto lo redirige a otra pagina que te muestra los detalles del producto, si el cliente toca el boton de agregar al carrito, se le crea un carrito unico en la base de datos , y lo redirige a la pagina donde se muestra su carrito,
      si el cliente toca el boton de iniciar compra, se le redirige a la pagina donde pone sus datos y esos datos se envian al servidor, con los datos de los productos de su carrito.
 
 -----------------------------Pruebas con POSTMAN para Productos----------------------------------
@@ -127,4 +124,98 @@ estudiante: Sofía Micaela Cortez
 KCQSWqWCltZ4EPzc
 
 mongodb+srv://sofiacortez6toprogramacion:KCQSWqWCltZ4EPzc@cluster0.g5aecsh.mongodb.net/productos?retryWrites=true&w=majority&appName=Cluster0
+
+
+paleta de colores 
+
+🟤 Tonos cálidos / tierra / piel
+#695958 (wengué – marrón oscuro elegante)
+
+#e0afa0 (melón – rosado empolvado)
+
+#b2aa8e (caqui – neutro cálido)
+
+#beb0a7 (plata – rosado beige apagado)
+
+#bcbd8b (sabio – amarillo verdoso claro)
+
+🟣 Tonos grisáceos / lavanda / violeta
+#93827f (gris-violeta)
+
+#8a8d91 (acorazado gris)
+
+#93a3bc (gris cadete)
+
+🟢 Verdes naturales / apagados
+#9a9b73 (verde musgo)
+
+#717744 (reseda verde)
+
+#8dab7f (olivino)
+
+#394032 (aceituna negra)
+
+#587b7f (mirto verde)
+
+#8b9d83 (azul cambridge)
+
+
                              
+Nueva paleta de colores:
+
+verdes: (de mas oscuro a mas claro)
+
+#2c3a2f 
+
+#354638 
+
+#3d5142
+
+#465d4b
+
+#4f6955
+
+#58745e
+
+#608068
+
+#698c72
+
+Azules 
+
+#212531
+
+#292e3d
+
+#313749
+
+#394956
+
+#414962
+
+#49536e
+
+#525c7A
+
+#5a6587
+
+
+paleta completa: 
+
+#212531 
+
+#5a6587
+
+#44414e
+
+#8c7e7d
+
+#5c6751
+
+#33392d
+
+
+
+
+
+ 
