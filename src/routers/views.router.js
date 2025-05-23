@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Cart from '../models/Cart.js';
 import Product from '../models/Product.js'; 
+import OrderCounter from '../models/OrderCounter.js'; 
 
 const router = express.Router();
 
@@ -136,13 +137,22 @@ router.get('/datosDeCompra', (req, res) => {
 router.post("/procesarCompra", async (req, res) => {
     const { cartId, nombre, email, direccion, telefono, codPostal, localidad, calle, numero } = req.body;
 
+    // Generar número de pedido
+    let orderCounter = await OrderCounter.findOne();
+    if (!orderCounter) {
+        orderCounter = new OrderCounter({ count: 1 });
+    } else {
+        orderCounter.count += 1;
+    }
+    await orderCounter.save();
+    const numeroPedido = orderCounter.count;
+
     console.log(`🛒 Compra realizada por ${nombre} <${email}>`);
     console.log(`📍 Dirección completa: ${calle} ${numero}, ${localidad}, CP: ${codPostal}`);
     console.log(`📞 Teléfono: ${telefono}`);
+    console.log(`🧾 Número de pedido: #${numeroPedido}`);
 
-    // Traer el carrito con los productos desde la BD
     const cart = await Cart.findById(cartId).populate("products.product");
-
 
     if (!cart) {
         console.log("⛔ Carrito no encontrado.");
@@ -157,13 +167,21 @@ router.post("/procesarCompra", async (req, res) => {
 
     console.log("🧾 Productos comprados:");
     productos.forEach((p, i) => {
-    console.log(`  #${i + 1} - ${p.nombre} | Cantidad: ${p.cantidad} | Precio: $${p.precio}`);
-    }); 
+        console.log(`  #${i + 1} - ${p.nombre} | Cantidad: ${p.cantidad} | Precio: $${p.precio}`);
+    });
 
-    // Eliminar el carrito de la sesión
     req.session.cartId = null;
-    // Podrías luego vaciar el carrito, enviar un correo, etc.
-    res.redirect("/products");
+
+    res.render("finalCompra", {
+        title: "Compra Finalizada",
+        nombre,
+        numeroPedido
+    });
+});
+
+
+router.get('/finalCompra', (req, res) => {
+  res.render('finalCompra'); // nombre de la vista .handlebars
 });
 
 export default router;

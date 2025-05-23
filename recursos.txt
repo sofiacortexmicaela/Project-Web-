@@ -1,0 +1,149 @@
+descripciones productos:
+
+BUZOS ALO OVERSIZE (M L XL) 
+- Frisa peinada.
+
+- Calidad Premium. 
+
+- Capucha forrada. 
+
+- Ojalillos metalicos en cordones de capucha. 
+
+- Costuras reforzadas. 
+
+
+
+{
+    "title": "Short Pollera NIKE",
+    "description": "SHORT POLLERA (M a XXL)  |  Tela LYCRA 70  |  Costuras Reforzadas | Estampado vinilo Reflex",
+    "code": "HP103",
+    "price": 20000,
+    "stock": 100,
+    "category": "shorts",
+    "available": true,
+    "thumbnails": [
+        "/img/shortpollera1.jpg",
+        "/img/shortpollera2.jpg",
+        "/img/shortpollera3.jpg",
+        "/img/shortpollera4.jpg",
+        "/img/shortpollera5.jpg"
+    ]
+}
+
+{
+    "title": "BUZO alo Oversize",
+    "description": "BUZOS ALO OVERSIZE (M L XL)  |  Frisa peinada  |  Calidad Premium  |  Capucha forrada  |  Ojalillos metalicos en cordones de capucha  |  Costuras reforzadas",
+    "code": "HP104",
+    "price": 42000,
+    "stock": 100,
+    "category": "buzos",
+    "available": true,
+    "thumbnails": [
+        "/img/buzoalo1.jpg",
+        "/img/buzoalo2.jpg",
+        "/img/buzoalo3.jpg",
+        "/img/buzoalo4.jpg",
+        "/img/buzoalo5.jpg",
+        "/img/buzoalo6.jpg",
+        "/img/buzoalo7.jpg",
+        "/img/buzoalo8.jpg",
+        "/img/buzoalo9.jpg",
+        "/img/buzoalo10.jpg"
+    ]
+}
+
+{
+    "title": "Top Manga Corta",
+    "description": "TOP MANGA CORTA (S M L)  |  Tela Suplex Premium  |  Calidad Original  |  Costuras Reforzadas",
+    "code": "HP105",
+    "price": 15800,
+    "stock": 100,
+    "category": "tops",
+    "available": true,
+    "thumbnails": [
+        "/img/topmangacorta1.jpg",
+        "/img/topmangacorta2.jpg",
+        "/img/topmangacorta3.jpg",
+        "/img/topmangacorta4.jpg",
+        "/img/topmangacorta5.jpg",
+        "/img/topmangacorta6.jpg",
+        "/img/topmangacorta7.jpg",
+        "/img/topmangacorta8.jpg"
+    ]
+}
+
+{
+    "title": "Calza Nike PRO",
+    "description": "CALZAS PRO (S a XL)  |  Calidad Original  |  Costuras Reforzadas  |  Tela Gofrada",
+    "code": "HP106",
+    "price": 22600,
+    "stock": 100,
+    "category": "Calzas",
+    "available": true,
+    "thumbnails": [
+        "/img/calzapro1.jpg",
+        "/img/calzapro2.jpg",
+        "/img/calzapro3.jpg",
+        "/img/calzapro4.jpg",
+        "/img/calzapro5.jpg"
+    ]
+}
+
+{
+    "title": "Musculosa alo",
+    "description": "MUSCULOSA ALO ( M L )  |  Tela MORLEY ELASTIZADO LA MEJOR CALIDAD  |  Logo BORDADO  |  Los talles abarcan 2 talles",
+    "code": "HP107",
+    "price": 17600,
+    "stock": 100,
+    "category": "remeras",
+    "available": true,
+    "thumbnails": [
+        "/img/musculosaalo1.jpg",
+        "/img/musculosaalo2.jpg",
+        "/img/musculosaalo3.jpg",
+        "/img/musculosaalo4.jpg"
+    ]
+}
+
+
+{
+    "title": "Short Nike PRO",
+    "description": "Shorts Pro (S a XL)  |  Calidad Original  |  Costuras Reforzadas  |  Tela Gofrada",
+    "code": "HP108",
+    "price": 17600,
+    "stock": 100,
+    "category": "shorts",
+    "available": true,
+    "thumbnails": [
+        "/img/shortpro1.jpg",
+        "/img/shortpro2.jpg",
+        "/img/shortpro3.jpg",
+        "/img/shortpro4.jpg",
+        "/img/shortpro5.jpg",
+        "/img/shortpro6.jpg",
+        "/img/shortpro7.jpg",
+        "/img/shortpro8.jpg",
+        "/img/shortpro9.jpg",
+        "/img/shortpro10.jpg",
+        "/img/shortpro11.jpg",
+        "/img/shortpro12.jpg"
+    ]
+}
+
+{
+    "title": "Camiseta Termica",
+    "description": "CAMISETAS TERMICAS (S a XXL)  |  Tela MODAL TERMICO  |  Excelentes costuras  |  Estampados REFLEX",
+    "code": "HP109",
+    "price": 16000,
+    "stock": 100,
+    "category": "remeras",
+    "available": true,
+    "thumbnails": [
+        "/img/remeratermica1.jpg",
+        "/img/remeratermica2.jpg",
+        "/img/remeratermica3.jpg",
+        "/img/remeratermica4.jpg",
+        "/img/remeratermica5.jpg",
+        "/img/remeratermica6.jpg"
+    ]
+}

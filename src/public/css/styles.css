@@ -20,7 +20,7 @@
 /* ============================= */
 .product-feed {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 0;
     margin: 0;
     padding: 0;
@@ -31,7 +31,7 @@
 .product-feed-item {
     display: block;
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 4 / 5;    /* medidas de imagenes como las de instagram*/
     overflow: hidden;
     text-decoration: none;
 }
@@ -216,7 +216,7 @@ footer {
 }
 
 .carousel-img {
-    max-width: 300px; /* bajamos de 350 a 300 */
+    max-width: 400px; /* bajamos de 350 a 300 */
     height: auto;
     border-radius: 10px;
     object-fit: cover;
@@ -228,7 +228,7 @@ footer {
   background-color: var(--color-acento);
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 15px 20px;
   font-size: 1.5rem;
   cursor: pointer;
   border-radius: 6px;
@@ -418,4 +418,20 @@ footer {
   border: none;
   margin: 0;
   padding: 0;
+}
+
+
+/*vista de finalizar compra*/
+.checkout-form-container.success {
+    text-align: center;
+    background-color: var(--color-principal2); /* o cualquier color más suave */
+    padding: 60px;
+    border-radius: 12px;
+    color: var(--color-secundario);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.checkout-form-container.success .info-msg {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
 }
