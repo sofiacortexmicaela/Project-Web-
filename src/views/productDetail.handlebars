@@ -4,52 +4,220 @@
     <meta charset="UTF-8">
     <title>{{product.title}}</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .product-detail-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            color: #fff;
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            width: 100%;
+            background-color: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            background-color: #000;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .thumbnail-carousel {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            object-fit: cover;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover {
+            border-color: #aaa;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info label,
+        .product-info select,
+        .product-info input {
+            display: block;
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .availability-msg {
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+
+        .disponibilidad-verde {
+            color: #00ff00;
+        }
+
+        .disponibilidad-roja {
+            color: #ff4444;
+        }
+
+        .disponibilidad-amarilla {
+            color: #ffaa00;
+        }
+
+        .add-btn {
+            padding: 0.7rem 1.5rem;
+            background-color: #ff5e00;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .add-btn:hover {
+            background-color: #ff7722;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #ccc;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <h1>{{product.title}}</h1>
-    </header>
 
     <main class="product-detail-container">
         <div class="product-card">
             <div class="carousel-container">
-    <img id="mainImage" src="{{#if product.thumbnails.[0]}}{{product.thumbnails.[0]}}{{else}}/img/default.jpg{{/if}}" alt="{{product.title}}" class="product-image">
-
-    <div class="thumbnail-carousel">
-        {{#each product.thumbnails}}
-            <img src="{{this}}" alt="Vista adicional" class="thumbnail" onclick="changeImage('{{this}}')">
-        {{/each}}
-    </div>
-</div>
-
+                <img id="mainImage" src="{{product.thumbnails.[0]}}" alt="{{product.title}}" class="product-image">
+                <div class="thumbnail-carousel">
+                    {{#each product.thumbnails}}
+                        <img src="{{this}}" alt="Vista adicional" class="thumbnail" onclick="changeImage('{{this}}')">
+                    {{/each}}
+                </div>
+            </div>
 
             <div class="product-info">
+                <h2>{{product.title}}</h2>
                 <p><strong>Descripción:</strong> {{product.description}}</p>
                 <p><strong>Precio:</strong> ${{product.price}}</p>
                 <p><strong>Categoría:</strong> {{product.category}}</p>
-                <p><strong>Disponibilidad:</strong> 
-                    {{#if product.available}}
-                        <span class="disponible">Disponible</span>
-                    {{else}}
-                        <span class="no-disponible">No disponible</span>
-                    {{/if}}
+
+                <label for="talle">Talle:</label>
+                <select id="talle">
+                    <option value="">Seleccionar talle</option>
+                    {{#each product.talles}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+
+                <label for="color">Color:</label>
+                <select id="color">
+                    <option value="">Seleccionar color</option>
+                    {{#each product.colores}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" value="1" min="1">
+
+                <div class="availability-msg" id="availabilityMsg">
+                    Seleccioná talle y color para ver disponibilidad
+                </div>
 
                 <form action="/add-to-cart/{{product._id}}" method="POST">
-                     <input type="hidden" name="cartId" value="{{cartId}}">
-                     <button type="submit" class="add-btn">Agregar al carrito</button>
+                    <input type="hidden" name="cartId" value="{{cartId}}">
+                    <button type="submit" class="add-btn">Agregar al carrito</button>
                 </form>
-                </p>
+
                 <a href="/products" class="volver">← Volver a productos</a>
             </div>
         </div>
     </main>
 
-
     <script>
+    const product = {{{json product}}};
+
+    const talleSelect = document.getElementById('talle');
+    const colorSelect = document.getElementById('color');
+    const cantidadInput = document.getElementById('cantidad');
+    const availabilityMsg = document.getElementById('availabilityMsg');
+    const addToCartBtn = document.querySelector('.add-btn');
+
+    talleSelect.addEventListener('change', updateAvailability);
+    colorSelect.addEventListener('change', updateAvailability);
+
     function changeImage(src) {
-        const mainImg = document.getElementById('mainImage');
-        mainImg.src = src;
+        document.getElementById('mainImage').src = src;
     }
-    </script>
+
+    function updateAvailability() {
+        const talle = talleSelect.value;
+        const color = colorSelect.value;
+
+        if (talle && color) {
+            const match = product.stock.find(item => item.talle === talle && item.color === color);
+            if (match) {
+                let clase = "";
+                let disponible = false;
+
+                if (match.disponibilidad.includes("inmediata")) {
+                    clase = "disponibilidad-verde";
+                    disponible = true;
+                } else if (match.disponibilidad.includes("pedido")) {
+                    clase = "disponibilidad-amarilla";
+                    disponible = true;
+                } else {
+                    clase = "disponibilidad-roja";
+                }
+
+                availabilityMsg.textContent = match.disponibilidad;
+                availabilityMsg.className = `availability-msg ${clase}`;
+
+                cantidadInput.max = match.cantidad;
+                cantidadInput.value = match.cantidad > 0 ? 1 : 0;
+                cantidadInput.disabled = !disponible;
+                addToCartBtn.disabled = !disponible;
+            } else {
+                availabilityMsg.textContent = "🔴 No disponible";
+                availabilityMsg.className = "availability-msg disponibilidad-roja";
+                cantidadInput.value = 0;
+                cantidadInput.disabled = true;
+                addToCartBtn.disabled = true;
+            }
+        } else {
+            availabilityMsg.textContent = "Seleccioná talle y color para ver disponibilidad";
+            availabilityMsg.className = "availability-msg";
+            cantidadInput.value = 1;
+            cantidadInput.disabled = true;
+            addToCartBtn.disabled = true;
+        }
+    }
+
+    // Al iniciar, desactivar botón hasta que seleccione algo válido
+    updateAvailability();
+</script>
 </body>
 </html>
