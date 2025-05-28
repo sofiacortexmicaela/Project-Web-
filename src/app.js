@@ -119,7 +119,7 @@ io.on('connection', (socket) => {
         }
     })
 });
-
+const PORT = process.env.PORT || 8080;
 // Iniciar el servidor
 server.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
