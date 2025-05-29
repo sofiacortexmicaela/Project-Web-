@@ -184,4 +184,8 @@ router.get('/finalCompra', (req, res) => {
   res.render('finalCompra'); // nombre de la vista .handlebars
 });
 
+router.get('/', (req, res) => {
+  res.redirect('/products');
+});
+
 export default router;

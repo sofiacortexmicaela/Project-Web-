@@ -21,7 +21,6 @@ console.log("MONGO_URI desde .env:", process.env.MONGO_URI)
 
 // servidor
 const app = express(); 
-const port = 8080;
 const server = http.createServer(app);
 const io = new Server(server);
 
@@ -121,8 +120,8 @@ io.on('connection', (socket) => {
 });
 const PORT = process.env.PORT || 8080;
 // Iniciar el servidor
-server.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`);
+server.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
 
 // Conectar a MongoDB Atlas

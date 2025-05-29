@@ -23,7 +23,7 @@
             /routers
                 carts.router.js               # Rutas relacionadas con carritos
                 products.router.js            # Rutas relacionadas con productos
-                views.router.js               # Rutas relacionadas a lo mostrado en la Web de la vista /products
+                views.router.js               # Rutas relacionadas a lo mostrado en la Web 
             /views
                 productDetail.handlebars      # pagina de detalles de los productos
                 products.handlebars           # pagina principal
