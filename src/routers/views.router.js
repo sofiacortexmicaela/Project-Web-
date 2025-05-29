@@ -188,4 +188,16 @@ router.get('/', (req, res) => {
   res.redirect('/products');
 });
 
+
+
+router.get('/nosotros', (req, res) => {
+  res.render('nosotros', { title: 'Nosotros' });
+});
+
+router.get('/informacion', (req, res) => {
+  res.render('informacion', { title: 'Informacion' });
+});
+
+
+
 export default router;
