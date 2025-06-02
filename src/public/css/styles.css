@@ -527,3 +527,85 @@ footer {
 .hero-gallery img:hover {
   transform: scale(1.05);
 }
+
+
+
+
+
+
+/* ============================= */
+/* 📱 ESTILOS RESPONSIVE */
+/* ============================= */
+@media (max-width: 768px) {
+  .navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-principal);
+  padding: 15px 20px;
+  text-align: center;
+}
+
+.nav-logo {
+  font-size: 1.8rem;
+  color: var(--color-acento);
+  font-weight: bold;
+  margin-bottom: 20px; /* Ahora tiene más espacio */
+}
+
+  .nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.nav-links li a {
+  color: var(--color-secundario);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.nav-links li a:hover {
+  text-decoration: underline;
+}
+
+  .hero {
+    padding: 40px 15px;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .hero-gallery {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .hero-gallery img {
+    width: 90%;
+    height: auto;
+    max-width: 350px;
+  }
+
+  .product-feed {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 5px;
+  }
+
+  footer {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
