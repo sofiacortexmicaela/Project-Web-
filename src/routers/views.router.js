@@ -199,5 +199,13 @@ router.get('/informacion', (req, res) => {
 });
 
 
+router.get('/catalogo', async (req, res) => {
+  try {
+    const products = await Product.find(); // o con paginación
+    res.render('catalogo', { products });
+  } catch (error) {
+    res.status(500).send('Error al cargar el catálogo');
+  }
+});
 
 export default router;

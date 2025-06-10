@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- 🌐 NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <a href="/products">
+        <img src="/img/logo.png" alt="Logo de la marca" class="logo-img">
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="/catalogo">Productos</a></li>
+      <li><a href="/nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="/informacion">Información</a></li>
+    </ul>
+  </nav>
+
+  <!-- 🛍️ CATÁLOGO -->
+  <section class="catalogo">
+    <h2>Catálogo de Productos</h2>
+    <div class="catalogo-grid">
+      {{#each products}}
+        <a href="/products/{{this._id}}" class="catalogo-item">
+          <img src="{{this.thumbnails.[0]}}" alt="{{this.title}}" class="catalogo-img" />
+          <h3>{{this.title}}</h3>
+          <p>${{this.price}}</p>
+        </a>
+      {{/each}}
+    </div>
+  </section>
+
+  <!-- 📞 CONTACTO -->
+  <footer id="contacto">
+    <p>Contacto: +54 11 1234-5678</p>
+    <p><a href="https://instagram.com/rise___sport" target="_blank">Nuestro Instagram</a></p>
+    <p>&copy; 2025 Ropa Deportiva </p>
+  </footer>
+
+</body>
+</html>

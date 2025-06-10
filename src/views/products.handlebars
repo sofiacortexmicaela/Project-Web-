@@ -10,9 +10,11 @@
 
   <!-- 🌐 NAVBAR -->
   <nav class="navbar">
-    <div class="nav-logo">Ropa Deportiva</div>
+    <div class="nav-logo">
+      <img src="/img/logo.png" alt="Logo de la marca" class="logo-img">
+    </div>
     <ul class="nav-links">
-      <li><a href="#productos">Productos</a></li>
+      <li><a href="/catalogo">Productos</a></li>
       <li><a href="/nosotros">Nosotros</a></li>
       <li><a href="#contacto">Contacto</a></li>
       <li><a href="/informacion">Información</a></li>
@@ -20,35 +22,74 @@
   </nav>
 
   <!-- 🖼️ SECCIÓN DE PRESENTACIÓN -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Tu Estilo, Tu Movimiento</h1>
-      <p>Ropa deportiva femenina para entrenar con actitud</p>
-      <a href="#productos" class="hero-button">Ver Catálogo</a>
-    </div>
-    <div class="hero-gallery">
-      <img src="/img/banner1.jpeg" alt="modelo1">
-      <img src="/img/banner2.jpeg" alt="modelo2">
-      <img src="/img/banner3.jpeg" alt="modelo3">
-    </div>
-  </section>
+  <section class="hero-carousel">
+  <div class="carousel-track" id="carouselTrack">
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    <!-- duplicadas para loop continuo -->
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner1" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner2" />
+    <img src="/img/banner2.jpg" class="carousel-img" alt="banner3" />
+    
+  </div>
+  <div class="hero-overlay">
+    <h1>Tu estilo, tu movimiento</h1>
+    <a href="/catalogo" class="hero-button">Ver catálogo</a>
+  </div>
+</section>
 
-  <!-- 🛍️ FEED DE PRODUCTOS -->
-  <main id="productos">
-    <div class="product-feed">
-    {{#each products}}
-      <a href="/products/{{this._id}}" class="product-feed-item">
-        <img src="{{this.thumbnails.[0]}}" alt="{{this.title}}" class="product-feed-img" />
-      </a>
-    {{/each}}
-    </div>
-  </main>
+
 
   <!-- 📞 CONTACTO -->
   <footer id="contacto">
     <p>Contacto: +54 11 1234-5678</p>
-    <p><a href="https://instagram.com/sofitdeportes" target="_blank">@sofitdeportes</a></p>
-    <p>&copy; 2025 Ropa Deportiva Femenina</p>
+    <p><a href="https://instagram.com/rise___sport" target="_blank">Nuestro Instgram</a></p>
+    <p>&copy; 2025 Ropa Deportiva </p>
   </footer>
 
 </body>
