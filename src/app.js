@@ -49,19 +49,20 @@ app.use(methodOverride('_method'));
 app.use('/', viewsRouter);
 
 // Handlebars
-app.engine(
-    'handlebars',
-    engine({
-        extname: '.handlebars',
-        defaultLayout: 'main',
-        layoutsDir: path.join(__dirname, 'views/layouts'),
-        partialsDir: path.join(__dirname, 'views/partials'),
-        runtimeOptions: {
-            allowProtoPropertiesByDefault: true, // Permitir acceso a propiedades del prototipo
-            allowProtoMethodsByDefault: true,   // Permitir acceso a métodos del prototipo (opcional)
-        },
-    })
-);
+app.engine('handlebars', engine({
+    extname: '.handlebars',
+    defaultLayout: 'main',
+    layoutsDir: path.join(__dirname, 'views/layouts'),
+    partialsDir: path.join(__dirname, 'views/partials'),
+    helpers: {
+      multiply: (a, b) => a * b
+    },
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true
+    }
+}));
+
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 

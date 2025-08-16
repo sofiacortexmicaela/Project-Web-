@@ -108,54 +108,54 @@
 <body>
 
     <main class="product-detail-container">
-        <div class="product-card">
-            <div class="carousel-container">
-                <img id="mainImage" src="{{product.thumbnails.[0]}}" alt="{{product.title}}" class="product-image">
-                <div class="thumbnail-carousel">
-                    {{#each product.thumbnails}}
-                        <img src="{{this}}" alt="Vista adicional" class="thumbnail" onclick="changeImage('{{this}}')">
-                    {{/each}}
-                </div>
+    <div class="product-card">
+        <div class="carousel-container">
+            <img id="mainImage" src="{{product.thumbnails.[0]}}" alt="{{product.title}}" class="product-image">
+            <div class="thumbnail-carousel">
+                {{#each product.thumbnails}}
+                    <img src="{{this}}" alt="Vista adicional" class="thumbnail" onclick="changeImage('{{this}}')">
+                {{/each}}
             </div>
+        </div>
 
-            <div class="product-info">
-                <h2>{{product.title}}</h2>
-                <p><strong>Descripción:</strong> {{product.description}}</p>
-                <p><strong>Precio:</strong> ${{product.price}}</p>
-                <p><strong>Categoría:</strong> {{product.category}}</p>
+        <div class="product-info">
+            <h2>{{product.title}}</h2>
+            <p><strong>Descripción:</strong> {{product.description}}</p>
+            <p><strong>Precio:</strong> ${{product.price}}</p>
+            <p><strong>Categoría:</strong> {{product.category}}</p>
+
+            <form action="/add-to-cart/{{product._id}}" method="POST">
+                <input type="hidden" name="cartId" value="{{cartId}}">
 
                 <label for="talle">Talle:</label>
-                <select id="talle">
-                    <option value="">Seleccionar talle</option>
-                    {{#each product.talles}}
-                        <option value="{{this}}">{{this}}</option>
-                    {{/each}}
-                </select>
-
+                <select id="talle" name="size" required>
+    <option value="">Seleccionar talle</option>
+    {{#each product.talles}}
+        <option value="{{this}}">{{this}}</option>
+    {{/each}}
+</select>
                 <label for="color">Color:</label>
-                <select id="color">
-                    <option value="">Seleccionar color</option>
-                    {{#each product.colores}}
-                        <option value="{{this}}">{{this}}</option>
-                    {{/each}}
-                </select>
+                <select id="color" name="color" required>
+    <option value="">Seleccionar color</option>
+    {{#each product.colores}}
+        <option value="{{this}}">{{this}}</option>
+    {{/each}}
+</select>
 
                 <label for="cantidad">Cantidad:</label>
-                <input type="number" id="cantidad" name="cantidad" value="1" min="1">
+                <input type="number" id="cantidad" name="quantity" value="1" min="1" required>
 
                 <div class="availability-msg" id="availabilityMsg">
                     Seleccioná talle y color para ver disponibilidad
                 </div>
 
-                <form action="/add-to-cart/{{product._id}}" method="POST">
-                    <input type="hidden" name="cartId" value="{{cartId}}">
-                    <button type="submit" class="add-btn">Agregar al carrito</button>
-                </form>
+                <button type="submit" class="add-btn" disabled>Agregar al carrito</button>
+            </form>
 
-                <a href="/products" class="volver">← Volver a productos</a>
-            </div>
+            <a href="/products" class="volver">← Volver a productos</a>
         </div>
-    </main>
+    </div>
+</main>
 
     <script>
     const product = {{{json product}}};
@@ -176,6 +176,8 @@
     function updateAvailability() {
         const talle = talleSelect.value;
         const color = colorSelect.value;
+
+        console.log("Seleccionaste:", { talle, color }); // 👈 Esto nos confirma lo que se envía
 
         if (talle && color) {
             const match = product.stock.find(item => item.talle === talle && item.color === color);
@@ -219,5 +221,6 @@
     // Al iniciar, desactivar botón hasta que seleccione algo válido
     updateAvailability();
 </script>
+
 </body>
 </html>

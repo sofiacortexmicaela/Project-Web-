@@ -1,42 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>{{title}}</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
     <header>
         <h1 class="page-title">{{title}}</h1>
     </header>
 
-    <main class="cart-container">
+    <main class="cart-container" style="padding-bottom: 5rem;">
         {{#if cart.products.length}}
             <ul class="cart-product-list">
                 {{#each cart.products}}
                     <li class="cart-product-item">
-                        <img src="{{product.thumbnails.[0]}}" alt="{{product.title}}" class="product-image">
+                        <img src="{{product.thumbnails.[0]}}" alt="{{product.title}}" class="product-image" />
                         <div>
-                            <strong>{{this.product.title}}</strong><br>
-                            Cantidad: {{this.quantity}}<br>
-                            Precio: ${{this.product.price}}<br>
-                            <small>{{this.product.description}}</small>
+                            <strong>{{product.title}}</strong><br />
+                            Talle: {{#if this.size}}{{this.size}}{{else}}No especificado{{/if}}<br />
+                            Color: {{#if this.color}}{{this.color}}{{else}}No especificado{{/if}}<br />
+                            Cantidad: {{this.quantity}}<br />
+                            Subtotal: ${{multiply this.quantity product.price}}<br />
+                            <small>{{product.description}}</small>
                         </div>
                     </li>
                 {{/each}}
             </ul>
 
-            <div class="cart-actions">
-                <a href="/products"><button class="primary-btn">Agregar más productos</button></a>
-                <form action="/datosDeCompra" method="GET">
-                    <button type="submit" class="primary-btn">Iniciar compra</button>
+            {{!-- Botón "Agregar más productos" arriba --}}
+            <div class="cart-actions" style="margin: 1rem 0;">
+                <a href="/catalogo"><button class="primary-btn">Agregar más productos</button></a>
+            </div>
+
+            {{!-- Total y botón "Finalizar compra" fijo abajo --}}
+            <div class="cart-footer-menu" style="
+                position: fixed; 
+                bottom: 0; left: 0; right: 0; 
+                background:#222; 
+                color:#fff; 
+                padding: 1rem 2rem; 
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center; 
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.7);
+                z-index: 1000;
+                ">
+                <strong>Total: ${{total}}</strong>
+                <form action="/datosDeCompra" method="GET" style="margin: 0;">
+                    <button type="submit" class="primary-btn">Finalizar compra</button>
                 </form>
             </div>
+
         {{else}}
             <p class="empty-cart-msg">Tu carrito está vacío.</p>
-            <a href="/products"><button class="primary-btn">Ir a productos</button></a>
+            <a href="/catalogo"><button class="primary-btn">Ir a productos</button></a>
         {{/if}}
     </main>
 </body>
 </html>
-

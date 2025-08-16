@@ -1,4 +1,5 @@
 import Product from '../models/Product.js'; 
+import Cart from '../models/Cart.js';
 
 // Obtener productos con paginación, filtros y ordenamiento
 export const getProductsWithPagination = async (req, res) => {

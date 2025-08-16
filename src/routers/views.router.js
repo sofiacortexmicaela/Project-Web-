@@ -2,7 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Cart from '../models/Cart.js';
 import Product from '../models/Product.js'; 
-import OrderCounter from '../models/OrderCounter.js'; 
 
 const router = express.Router();
 
@@ -37,13 +36,16 @@ router.get('/products/:id', async (req, res) => {
             return res.status(404).render('error', { message: 'Producto no encontrado' });
         }
 
+        const cartId = req.session.cartId; // ← para que lo use el form
+
         res.render('productDetail', {
-        title: `Detalle de ${product.title}`,
-        product,
-        helpers: {
-         json: (context) => JSON.stringify(context)
-        }
-    });
+            title: `Detalle de ${product.title}`,
+            product,
+            cartId,
+            helpers: {
+                json: (context) => JSON.stringify(context)
+            }
+        });
     } catch (error) {
         console.error('Error al obtener producto:', error);
         res.status(500).render('error', { message: 'Error del servidor' });
@@ -51,56 +53,43 @@ router.get('/products/:id', async (req, res) => {
 });
 
 //------------------------CREAR CARRITO DESDE LA WEB--------------//
-router.post('/add-to-cart/:pid', async (req, res) => {
-    try {
-        const productId = req.params.pid;
-        const objectProductId = new mongoose.Types.ObjectId(productId);
+router.post("/add-to-cart/:pid", async (req, res) => {
+     const { pid } = req.params; // 👈 Esto estaba faltando
+    console.log("Datos recibidos del form:", req.body); // 👈 Esto nos dirá si size y color están llegando
 
-        let cartId = req.body.cartId || req.session.cartId;
-        console.log('Cart ID recibido:', cartId);
+    const { size, color, quantity } = req.body;
 
-        let cart;
-
-        // crear nuevo carrito si no existe
-        if (!cartId) {
-            const newCart = new Cart({ products: [] });
-            cart = await newCart.save();
-            cartId = cart._id.toString();
-            req.session.cartId = cartId;
-            console.log(' Carrito nuevo creado <3 ', cartId);
-        } else {
-            cart = await Cart.findById(cartId);
-            if (!cart) {
-                const newCart = new Cart({ products: [] });
-                cart = await newCart.save();
-                cartId = cart._id.toString();
-                req.session.cartId = cartId;
-                console.log(' Carrito no encontrado, se creó uno nuevo:', cartId);
-            } else {
-                console.log(' Carrito existente encontrado:', cartId);
-            }
-        }
-
-        // verifica si el producto ya está
-        const existingProductIndex = cart.products.findIndex(p => p.product.toString() === productId);
-
-        if (existingProductIndex !== -1) {
-            cart.products[existingProductIndex].quantity += 1;
-        } else {
-            cart.products.push({ product: objectProductId, quantity: 1 });
-        }
-
-        await cart.save();
-
-        console.log(' Producto agregado correctamente al carrito  <3 ', productId);
-        console.log(' Estado actual del carrito:', cart.products);
-
-        res.redirect(`/carts/${cartId}`);
-    } catch (error) {
-        console.error(' xxx Error al agregar producto al carrito:', error);
-        res.status(500).send('Error al agregar producto al carrito');
+    if (!size || !color) {
+        return res.status(400).send("Talle y color no especificado");
     }
+
+    // Si no existe carrito en sesión, crear uno
+    if (!req.session.cartId) {
+        const newCart = await Cart.create({ products: [] });
+        req.session.cartId = newCart._id;
+    }
+
+    const cart = await Cart.findById(req.session.cartId);
+
+    const existingItem = cart.products.find(
+        item => item.product.toString() === pid && item.size === size && item.color === color
+    );
+
+    if (existingItem) {
+        existingItem.quantity += Number(quantity);
+    } else {
+        cart.products.push({
+            product: pid,
+            size,
+            color,
+            quantity: Number(quantity)
+        });
+    }
+
+    await cart.save();
+    res.redirect(`/carts/${req.session.cartId}`);
 });
+
 //-----------------
 router.get('/carts/:cid', async (req, res) => {
     try {
@@ -109,9 +98,24 @@ router.get('/carts/:cid', async (req, res) => {
 
         if (!cart) return res.status(404).send('Carrito no encontrado');
 
+        // Calculamos total
+        let total = 0;
+
+        // Aseguramos que cada producto tenga talle y color (ajustá según cómo lo guardes en tu carrito)
+        const productsWithDetails = cart.products.map(item => {
+            total += item.quantity * item.product.price;
+            return {
+                product: item.product,
+                quantity: item.quantity,
+                size: item.size || 'No especificado',
+                color: item.color || 'No especificado'
+            };
+        });
+
         res.render('cartView', {
             title: 'Tu carrito',
-            cart
+            cart: { products: productsWithDetails },
+            total
         });
     } catch (error) {
         console.error('Error al mostrar el carrito:', error);
@@ -137,20 +141,9 @@ router.get('/datosDeCompra', (req, res) => {
 router.post("/procesarCompra", async (req, res) => {
     const { cartId, nombre, email, direccion, telefono, codPostal, localidad, calle, numero } = req.body;
 
-    // Generar número de pedido
-    let orderCounter = await OrderCounter.findOne();
-    if (!orderCounter) {
-        orderCounter = new OrderCounter({ count: 1 });
-    } else {
-        orderCounter.count += 1;
-    }
-    await orderCounter.save();
-    const numeroPedido = orderCounter.count;
-
-    console.log(`🛒 Compra realizada por ${nombre} <${email}>`);
-    console.log(`📍 Dirección completa: ${calle} ${numero}, ${localidad}, CP: ${codPostal}`);
-    console.log(`📞 Teléfono: ${telefono}`);
-    console.log(`🧾 Número de pedido: #${numeroPedido}`);
+    // Generar número de pedido SIN OrderCounter
+    const ultimoCarrito = await Cart.findOne({ orderNumber: { $gt: 0 } }).sort({ orderNumber: -1 });
+    const numeroPedido = ultimoCarrito ? ultimoCarrito.orderNumber + 1 : 1;
 
     const cart = await Cart.findById(cartId).populate("products.product");
 
@@ -159,25 +152,64 @@ router.post("/procesarCompra", async (req, res) => {
         return res.status(404).send("Carrito no encontrado");
     }
 
-    const productos = cart.products.map(p => ({
-        nombre: p.product.title,
-        cantidad: p.quantity,
-        precio: p.product.price
-    }));
+    // Añade los datos al carrito y guarda como pedido finalizado
+    cart.orderNumber = numeroPedido;
+    cart.customerName = nombre;
+    cart.customerEmail = email;
+    cart.customerPhone = telefono;
+    cart.customerAddress = `${calle} ${numero}, ${localidad}, CP: ${codPostal}`;
 
+    // Actualiza los productos y calcula total
+    let total = 0;
+    const productos = cart.products.map((p) => {
+        const subtotal = p.quantity * p.product.price;
+        total += subtotal;
+        return {
+            nombre: p.product.title,
+            cantidad: p.quantity,
+            precio: p.product.price,
+            size: p.size,
+            color: p.color,
+            subtotal
+        };
+    });
+
+    cart.total = total;
+    await cart.save();
+
+    // Mostrar solo la info de la compra en la consola
+    console.log(`🛒 Compra realizada por ${nombre} <${email}>`);
+    console.log(`📍 Dirección completa: ${calle} ${numero}, ${localidad}, CP: ${codPostal}`);
+    console.log(`📞 Teléfono: ${telefono}`);
+    console.log(`🧾 Número de pedido: #${numeroPedido}`);
     console.log("🧾 Productos comprados:");
     productos.forEach((p, i) => {
-        console.log(`  #${i + 1} - ${p.nombre} | Cantidad: ${p.cantidad} | Precio: $${p.precio}`);
+        console.log(
+            `  #${i + 1} - ${p.nombre} | Talle: ${p.size} | Color: ${p.color} | Cantidad: ${p.cantidad} | Precio unitario: $${p.precio} | Subtotal: $${p.subtotal}`
+        );
     });
+    console.log(`💰 Total de la compra: $${total}`);
 
     req.session.cartId = null;
 
     res.render("finalCompra", {
         title: "Compra Finalizada",
         nombre,
-        numeroPedido
+        numeroPedido,
+        productos,
+        total
     });
 });
+
+
+router.get('/cartView', async (req, res) => {
+  const cartId = req.session.cartId;
+  if (!cartId) {
+    return res.redirect('/products'); // o catálogo
+  }
+  res.redirect(`/carts/${cartId}`);
+});
+
 
 
 router.get('/finalCompra', (req, res) => {

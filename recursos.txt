@@ -11,7 +11,14 @@ BUZOS ALO OVERSIZE (M L XL)
 
 - Costuras reforzadas. 
 
-
+🛒 Compra realizada por sofia <sofiacortez6toprogramacion@gmail.com>
+📍 Dirección completa: Uruguay 776 776, quilmes, CP: 1882
+📞 Teléfono: 1169667835
+🧾 Número de pedido: #1
+🧾 Productos comprados:
+  #1 - Top Training | Talle: S | Color: Negro | Cantidad: 2 | Precio unitario: $15000 | Subtotal: $30000
+  #2 - BUZO alo Oversize | Talle: M | Color: Azul | Cantidad: 2 | Precio unitario: $42000 | Subtotal: $84000     
+💰 Total de la compra: $114000
 
 {
     "title": "Short Pollera NIKE",
@@ -147,3 +154,17 @@ BUZOS ALO OVERSIZE (M L XL)
         "/img/remeratermica6.jpg"
     ]
 }
+
+
+
+como guardar cambios del proyecto en un nuevo commit: 
+
+consola bash
+
+> git status  (verifica los archivos modificados)
+
+> git add .    (agrega todos los cambios al repositorio)
+
+> git commit -m " Mejoras "   (hacer commit (rama))
+
+> git push origin master   (subir los cabios al repositorio remoto)
